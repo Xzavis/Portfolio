@@ -37,6 +37,7 @@ const config = {
           DEFAULT: "#FFF",
           100: "#BEC1DD",
           200: "#C1C2D3",
+          999: "hsl(var(--text-gradient-title))"
         },
         blue: {
           "100": "#E4ECFF",
