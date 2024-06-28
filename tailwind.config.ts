@@ -42,7 +42,7 @@ const config = {
         blue: {
           "100": "#E4ECFF",
         },
-        purple: "#CBACF9",
+        purple: "#974BFF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -194,7 +194,7 @@ const config = {
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    Object.entries(allColors).map(([key, val]) => [`-${key}`, val])
   );
 
   addBase({
