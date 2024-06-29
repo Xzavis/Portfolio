@@ -1,7 +1,13 @@
+'use client'
 import { cn } from "@/utils/cn";
 import { BackgroundGradientAnimation } from "./background-gradient-animation";
 import { GlobeDemo } from "./GridGlobe";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
+import Lottie from "react-lottie";
+import { useState } from "react";
+import animationData from '@/data/confetti.json';
+import { IoCopyOutline } from "react-icons/io5";
+import MagicButton from "./magicButton";
 
 export const BentoGrid = ({
   className,
@@ -13,7 +19,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[6rem] grid-cols-1 md:grid-cols-5 gap-8 max-w-5xl mx-auto ",
+        "grid md:auto-rows grid-cols-1 md:grid-cols-5 gap-8 max-w-5xl mx-auto ",
         className
       )}
     >
@@ -41,6 +47,14 @@ export const BentoGridItem = ({
   titleClassesName?: string;
   spareImg?: string;
 }) => {
+  // Membuat Loop Copas email
+  const [copied, setCopied] = useState(false);
+  // membuat sebuah Function ketika di Click bernama 'hanleClick'
+  const handleCopy = () => {
+    navigator.clipboard.writeText('xzabdulmalikibrahim@gmail.com')
+    // kita buat setCopy ketika true
+    setCopied(true)
+  }
   return (
     <div
       className={cn(
@@ -53,7 +67,7 @@ export const BentoGridItem = ({
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba (12,14,35,1) 100%)",
       }}
     >
-      <div className={`${id === 6} && 'flex justify-center h-full'`}>
+      <div className={`${id === 6 && 'flex justify-center'} h-full`}>
         <div className="w-full h-full absolute">
           {img && (
             <img
@@ -99,7 +113,7 @@ export const BentoGridItem = ({
           {id === 3 && (
             <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
               <div className="flex flex-col gap-3 lg:gap-8 ">
-                {['HTML5', 'JavaScript', 'PHP'].map((item) => (
+                {['Bootstrap 5', 'JavaScript', 'PHP'].map((item) => (
                   <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg bg-[#10123e]">
                     {item}
                   </span>
@@ -113,8 +127,28 @@ export const BentoGridItem = ({
                     {item}
                   </span>
                 ))}
-
               </div>
+            </div>
+          )}
+          {id === 6 && (
+            <div className="mt-4 relative">
+              <div className="absolute -bottom-5 right-0">
+                <Lottie options={{
+                  loop: copied,
+                  autoplay: copied,
+                  animationData,
+                  rendererSettings: {
+                    preserveAspectRatio: 'xMiYMid slice',
+                  }
+                }} />
+              </div>
+              <MagicButton
+                title={copied ? 'Email Copied' : 'Copy My Email'}
+                icon={<IoCopyOutline />}
+                position="left"
+                otherClasses='!bg-[#161a31]'
+                handleClick={handleCopy}
+              />
             </div>
           )}
         </div>
